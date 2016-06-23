@@ -11,6 +11,23 @@ public class Address {
 	
 	
 	
+	// Construtor
+	
+	public Address(long idAddress, String publicPlace, String neighborhood, long number) {
+		this.idAddress = idAddress;
+		this.publicPlace = publicPlace;
+		this.neighborhood = neighborhood;
+		this.number = number;
+	}
+	
+	public Address (String publicPlace, String neighborhood, long number) {
+		this.publicPlace = publicPlace;
+		this.neighborhood = neighborhood;
+		this.number = number;
+	}
+	
+	
+	
 	// Métodos
 	
 	public long getIdAddress() {

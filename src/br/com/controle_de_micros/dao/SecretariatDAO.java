@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.com.controle_de_micros.database.Database;
+import br.com.controle_de_micros.model.Address;
+import br.com.controle_de_micros.model.Phone;
 import br.com.controle_de_micros.model.Secretariat;
 
 public class SecretariatDAO extends DAO<Secretariat> {
@@ -24,9 +26,17 @@ public class SecretariatDAO extends DAO<Secretariat> {
 	@Override
 	public boolean insert(Secretariat objeto) {
 		// TODO Inserir uma nova secretaria na base de dados.
+		boolean result = true;
 		
+		String sql = "INSERT INTO Secretariat (name, idAddress, idPhone) VALUES (?, ?, ?);";
 		
-		return false;
+		sql = sql.replaceFirst("\\?", objeto.getName());
+		sql = sql.replaceFirst("\\?", Long.toString(objeto.getAddress().getIdAddress()));
+		sql = sql.replaceFirst("\\?", Long.toString(objeto.getPhone().getIdPhone()));
+		
+		System.out.println(sql);
+		
+		return result;
 	}
 
 	@Override
@@ -47,7 +57,7 @@ public class SecretariatDAO extends DAO<Secretariat> {
 		
 		List<Secretariat> list = new ArrayList<Secretariat>();
 		
-		String query = "SELECT idSecretariat, name, a.neighborhood, a.publicPlace, a.number, p.number AS phone FROM secretariat AS sec "
+		String query = "SELECT idSecretariat, name, a.*, p.idPhone, p.number AS phone FROM secretariat AS sec "
 				+ "INNER JOIN address AS a "
 				+ "ON a.idAddress = sec.idAddress "
 				+ "INNER JOIN phone AS p "
@@ -60,8 +70,13 @@ public class SecretariatDAO extends DAO<Secretariat> {
 			while (result.next()) {
 				
 				Secretariat sec = new Secretariat();
+				Address address = new Address(result.getLong("idAddress"), result.getString("publicPlace"), result.getString("neighborhood"), result.getLong("number"));
+				Phone phone     = new Phone(result.getLong("idPhone"), result.getString("phone"));
 				
+				sec.setIdSecretariat(result.getLong("idSecretariat"));
 				sec.setName(result.getString("name"));
+				sec.setAddress(address);
+				sec.setPhone(phone);
 				
 				list.add(sec);
 			}

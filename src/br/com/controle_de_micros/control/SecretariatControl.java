@@ -11,7 +11,6 @@ public class SecretariatControl {
 
 	private SecretariatDAO dao;
 	
-	
 	public SecretariatControl() {
 		Database database = new MariaDatabase("root", "", "control");
 		dao = new SecretariatDAO(database);

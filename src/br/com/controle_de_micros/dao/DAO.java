@@ -12,9 +12,18 @@ public abstract class DAO<E> {
 		this.database = database;
 	}
 	
+	/**
+	 * @author Caio de Freitas Adriano
+	 * @since 2016-06-23
+	 * @param objeto dado do objeto que será inserido no banco de dados
+	 * @return boolean TRUE caso o objeto seja inserido com sucesso.
+	 */
 	public abstract boolean insert(E objeto);
+	
 	public abstract boolean update(E objeto);
+	
 	public abstract boolean delete(E objeto);
+	
 	public abstract List<E> listAll();
 
 }

@@ -5,6 +5,7 @@ public class Secretariat {
 	private long idSecretariat;
 	private String name;
 	private Address address;
+	private Phone phone;
 	
 	
 	
@@ -31,6 +32,12 @@ public class Secretariat {
 	}
 	public void setAddress(Address address) {
 		this.address = address;
+	}
+	public Phone getPhone(){
+		return phone;
+	}
+	public void setPhone(Phone phone){
+		this.phone = phone;
 	}
 
 }
