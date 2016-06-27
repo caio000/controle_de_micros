@@ -22,7 +22,7 @@ public class MariaDatabase implements Database {
 	private Connection connection;
 	
 	
-	// Método Construtor
+	// Mï¿½todo Construtor
 	
 	public MariaDatabase(String host, String username, String password, String databaseName, int port) {
 		this.host = host;
@@ -40,7 +40,7 @@ public class MariaDatabase implements Database {
 		this("localhost", username, password, databaseName, 3306);
 	}
 	
-	// Métodos
+	// Mï¿½todos
 
 	@Override
 	public boolean connect() {
@@ -48,7 +48,7 @@ public class MariaDatabase implements Database {
 		boolean result = true;
 		
 		try {
-			// verifica se já existe uma conexão ativa com o banco de dados
+			// verifica se jï¿½ existe uma conexï¿½o ativa com o banco de dados
 			if (this.connection != null)
 				this.connection.close(); // fecha a conexao com banco de dados
 			
@@ -87,7 +87,28 @@ public class MariaDatabase implements Database {
 	@Override
 	public boolean insert(String sql) {
 		// TODO Auto-generated method stub
-		return false;
+		
+		boolean result = true;
+		
+		PreparedStatement stmt;
+		
+		try {
+			
+			if (this.connection != null && !this.connection.isClosed()) {
+				stmt = this.connection.prepareStatement(sql);
+				stmt.execute();
+				
+				stmt.close();
+				connection.close(); // fecha a conexÃ£o com a base de dados.
+			} else {
+				throw new Exception("Database is not connected!");
+			}
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	@Override
@@ -109,9 +130,9 @@ public class MariaDatabase implements Database {
 		
 		try {
 			
-			/* verifica se existe uma conexão com a base de dados
-			 * e se a conexão esta aberta.
-			 * Se sim, a conexão é fechada
+			/* verifica se existe uma conexï¿½o com a base de dados
+			 * e se a conexï¿½o esta aberta.
+			 * Se sim, a conexï¿½o ï¿½ fechada
 			 */
 			if (this.connection != null && !this.connection.isClosed()) {
 				this.connection.close();

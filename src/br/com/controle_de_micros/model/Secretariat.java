@@ -10,10 +10,24 @@ public class Secretariat {
 	
 	
 	
+	public Secretariat() {
+	}
+	
+	public Secretariat(long idSecretariat, String name, Address address, Phone phone) {
+		this.idSecretariat = idSecretariat;
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+	}
+	
+	public Secretariat(String name, Address address, Phone phone) {
+		this.name = name;
+		this.address = address;
+		this.phone = phone;
+	}
 	
 	
-	
-	
+	// Métodos
 	
 	public String getName() {
 		return name;

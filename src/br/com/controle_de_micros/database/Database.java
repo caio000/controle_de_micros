@@ -7,7 +7,7 @@ public interface Database {
 	public boolean connect();
 	
 	/**
-	 * Essa função executa a query informada na base de dados o retorna o seu resultado.
+	 * Essa função executa a query informada na base de dados e retorna o seu resultado.
 	 * 
 	 * @author Caio de Freitas Adriano
 	 * @since 22/06/2016

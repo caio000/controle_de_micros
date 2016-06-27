@@ -26,17 +26,14 @@ public class SecretariatDAO extends DAO<Secretariat> {
 	@Override
 	public boolean insert(Secretariat objeto) {
 		// TODO Inserir uma nova secretaria na base de dados.
-		boolean result = true;
 		
-		String sql = "INSERT INTO Secretariat (name, idAddress, idPhone) VALUES (?, ?, ?);";
+		String sql = "INSERT INTO Secretariat (name, idAddress, idPhone) VALUES (\'?\', ?, ?);";
 		
-		sql = sql.replaceFirst("\\?", objeto.getName());
+		sql = sql.replaceFirst("\\?", objeto.getName().toUpperCase());
 		sql = sql.replaceFirst("\\?", Long.toString(objeto.getAddress().getIdAddress()));
 		sql = sql.replaceFirst("\\?", Long.toString(objeto.getPhone().getIdPhone()));
 		
-		System.out.println(sql);
-		
-		return result;
+		return database.insert(sql);
 	}
 
 	@Override

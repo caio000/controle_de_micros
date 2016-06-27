@@ -16,14 +16,23 @@ public class AddressControl {
 	}
 	
 	
-	
+	/**
+	 * Essa função insere um endereço na base de dados.
+	 * 
+	 * @author Caio de Freitas Adriano.
+	 * @since 2016/06/27
+	 * 
+	 * @param address: Objeto do tipo Address que possui os dados que será cadastrados.
+	 * @return idAddress: ID do endereço cadastrado.
+	 */
 	public long insertAddress(Address address){
 		
 		long idAddress = 0;
 		
-		if (dao.insert(address)) {
-			// TODO buscar no banco de dados o ID do endereço cadastrado.
-		}
+		dao.insert(address);
+		
+		// busca o ID do endereço que foi cadastradp
+		idAddress = dao.getGeneratedId(address);
 		
 		return idAddress;
 	}

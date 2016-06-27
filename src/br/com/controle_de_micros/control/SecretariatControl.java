@@ -18,6 +18,10 @@ public class SecretariatControl {
 	
 	
 	
+	public boolean insertSecretariat(Secretariat secretariat) {
+		return dao.insert(secretariat);
+	}
+	
 	public List<Secretariat> listSecretariat(){
 		return dao.listAll();
 	}

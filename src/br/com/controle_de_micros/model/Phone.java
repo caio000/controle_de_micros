@@ -16,6 +16,10 @@ public class Phone {
 		this.number = number;
 	}
 	
+	public Phone(String number){
+		this.number = number;
+	}
+	
 	
 	
 	// Métodos

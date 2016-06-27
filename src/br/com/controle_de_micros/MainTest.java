@@ -1,11 +1,12 @@
 package br.com.controle_de_micros;
 
-import java.util.List;
 import java.util.Scanner;
 
 import br.com.controle_de_micros.control.AddressControl;
+import br.com.controle_de_micros.control.PhoneControl;
 import br.com.controle_de_micros.control.SecretariatControl;
 import br.com.controle_de_micros.model.Address;
+import br.com.controle_de_micros.model.Phone;
 import br.com.controle_de_micros.model.Secretariat;
 
 public class MainTest {
@@ -13,23 +14,6 @@ public class MainTest {
 	public static void main(String[] args) {
 
 		Scanner read = new Scanner(System.in);
-		SecretariatControl secretariat = new SecretariatControl();
-
-		List<Secretariat> sec = secretariat.listSecretariat();
-
-		if (sec.isEmpty())
-			System.err.println("há secretarias cadastradas");
-		else {
-			for (int i = 0; i < sec.size(); i++) {
-				System.out.println("ID: " + sec.get(i).getIdSecretariat());
-				System.out.println("Nome:\t\t" + sec.get(i).getName());
-				System.out.print("Endereço:\t" + sec.get(i).getAddress().getPublicPlace() + ", "
-						+ sec.get(i).getAddress().getNeighborhood() + " - " + sec.get(i).getAddress().getNumber()
-						+ "\n");
-				System.out.println("Telefone:\t" + sec.get(i).getPhone().getNumber());
-				System.out.println("==================================================");
-			}
-		}
 
 		boolean correct = true;
 		do {
@@ -69,9 +53,30 @@ public class MainTest {
 				}
 				long number = Integer.parseInt(txtNumber);
 				
-				Address address = new Address(publicPlace, neighborhood, number);
+				System.out.println("Telefone..:");
+				String phoneNumber = read.nextLine();
+				if (phoneNumber.isEmpty()) {
+					correct = false;
+					throw new Exception("Informe o telefone");
+				}
 				
+				// Cadastra um novo endereço
+				Address address = new Address(publicPlace, neighborhood, number);
 				AddressControl ac = new AddressControl();
+				address.setIdAddress(ac.insertAddress(address));
+				
+				// Cadastra um novo telefone.
+				Phone phone = new Phone(phoneNumber);
+				PhoneControl pc = new PhoneControl();
+				phone.setIdPhone(pc.insertPhone(phone));
+				
+				// cadastra uma nova secretaria
+				Secretariat secretariat = new Secretariat(name, address, phone);
+				SecretariatControl sc = new SecretariatControl();
+				if (sc.insertSecretariat(secretariat))
+					System.out.println("Secretaria cadastrada com sucesso!");
+				else
+					System.out.println("Falha ao cadastrar, tente novamente!");
 
 			} catch (Exception e) {
 				System.err.println(e.getMessage());

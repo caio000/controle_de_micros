@@ -1,5 +1,7 @@
 package br.com.controle_de_micros.dao;
 
+import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.controle_de_micros.database.Database;
@@ -20,15 +22,13 @@ public class AddressDAO extends DAO<Address> {
 	@Override
 	public boolean insert(Address address) {
 		
-		String sql = "INSERT INTO Address (publicPlace, neighborhood, number) VALUES (?, ?, ?)";
+		String sql = "INSERT INTO Address (publicPlace, neighborhood, number) VALUES (\'?\', \'?\', ?);";
 		
-		sql = sql.replaceFirst("\\?", address.getPublicPlace());
-		sql = sql.replaceFirst("\\?", address.getNeighborhood());
+		sql = sql.replaceFirst("\\?", address.getPublicPlace().toUpperCase());
+		sql = sql.replaceFirst("\\?", address.getNeighborhood().toUpperCase());
 		sql = sql.replaceFirst("\\?", Long.toString(address.getNumber()));
 		
-		System.out.println(sql);
-		
-		return false;
+		return database.insert(sql);
 	}
 
 	@Override
@@ -46,7 +46,36 @@ public class AddressDAO extends DAO<Address> {
 	@Override
 	public List<Address> listAll() {
 		// TODO Auto-generated method stub
-		return null;
+		
+		List<Address> list = new ArrayList<>();
+		
+		return list;
+	}
+	
+	public long getGeneratedId(Address address) {
+		
+		long id = 0;
+		
+		String sql = "SELECT idAddress FROM Address WHERE publicPlace = \'?\' AND neighborhood = \'?\' AND number = ?;";
+		
+		sql = sql.replaceFirst("\\?", address.getPublicPlace().toUpperCase());
+		sql = sql.replaceFirst("\\?", address.getNeighborhood().toUpperCase());
+		sql = sql.replaceFirst("\\?", Long.toString(address.getNumber()));
+		
+		database.connect();
+		
+		ResultSet result = database.query(sql);
+		
+		try {
+			if (result.next())
+				id = result.getLong("idAddress");
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			database.disconnect();
+		}
+		
+		return id;
 	}
 
 }
