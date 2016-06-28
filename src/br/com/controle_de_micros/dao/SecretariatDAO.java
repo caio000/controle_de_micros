@@ -20,7 +20,6 @@ public class SecretariatDAO extends DAO<Secretariat> {
 	}
 	
 	
-	
 	// Métodos
 
 	@Override

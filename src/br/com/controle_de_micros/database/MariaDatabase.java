@@ -5,6 +5,8 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import javax.swing.JOptionPane;
+
 public class MariaDatabase implements Database {
 	
 	// Atributos
@@ -86,7 +88,6 @@ public class MariaDatabase implements Database {
 
 	@Override
 	public boolean insert(String sql) {
-		// TODO Auto-generated method stub
 		
 		boolean result = true;
 		
@@ -105,7 +106,7 @@ public class MariaDatabase implements Database {
 			}
 		} catch (Exception e) {
 			result = false;
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 
 		return result;
