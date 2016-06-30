@@ -7,6 +7,9 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class UserFrame extends JFrame {
 
@@ -38,5 +41,18 @@ public class UserFrame extends JFrame {
         table.setBorder(new LineBorder(new Color(0, 0, 0)));
         table.setBounds(10, 138, 414, 113);
         contentPane.add(table);
+        
+        JButton btnInsertUser = new JButton("Cadastrar");
+        btnInsertUser.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		JFrame insertUser = new RegisterFrame();
+        		insertUser.setVisible(true);
+        		dispose();
+        		
+        	}
+        });
+        btnInsertUser.setBounds(332, 34, 92, 46);
+        contentPane.add(btnInsertUser);
 	}
 }

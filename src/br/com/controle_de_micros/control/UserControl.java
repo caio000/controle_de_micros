@@ -18,11 +18,28 @@ public class UserControl {
 	
 	// MÃ©todos
 	
+	/**
+	 * Essa funcção cadastra um novo usuario na base de dados
+	 * 
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/06/26
+	 * 
+	 * @param user: objeto com os dados do usuario.
+	 * @return Retorna um Boolean true caso o usuario foi cadastrado com sucesso.
+	 */
 	public boolean insertUser(User user) {
 		return dao.insert(user);
 	}
 	
-	
+	/**
+	 * Essa função libera ou nao o acesso ao sistema para o usuario informado
+	 * 
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/06/29
+	 * 
+	 * @param user: objeto com os dados do usuario
+	 * @return retorna um boolean True caso o usuario esteja cadastrado na base de dados
+	 */
 	public boolean makeLogin(User user){
 		return dao.checkUser(user);
 	}

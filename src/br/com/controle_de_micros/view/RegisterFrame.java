@@ -1,46 +1,38 @@
 package br.com.controle_de_micros.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
-import javax.swing.JFormattedTextField;
-import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.JCheckBox;
-import javax.swing.JButton;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.MessageDigest;
+
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.border.EmptyBorder;
+
+import br.com.controle_de_micros.control.UserControl;
+import br.com.controle_de_micros.model.User;
 
 public class RegisterFrame extends JFrame {
 
+	private static final long serialVersionUID = -6414200982232169807L;
 	private JPanel contentPane;
-	private JPasswordField CampoSenha;
+	private JPasswordField passwordField;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegisterFrame frame = new RegisterFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public RegisterFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 474, 311);
+		initComponent();
+	}
+	
+	
+	public void initComponent() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 282, 391);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -50,36 +42,81 @@ public class RegisterFrame extends JFrame {
 		Matricula.setBounds(34, 72, 66, 14);
 		contentPane.add(Matricula);
 		
-		JFormattedTextField CampoMatricula = new JFormattedTextField();
-		CampoMatricula.setBounds(34, 85, 171, 27);
-		contentPane.add(CampoMatricula);
+		final JFormattedTextField registrationField = new JFormattedTextField();
+		registrationField.setBounds(34, 85, 171, 27);
+		contentPane.add(registrationField);
 		
 		JLabel Nome = new JLabel("Nome");
 		Nome.setBounds(34, 123, 66, 14);
 		contentPane.add(Nome);
 		
-		JFormattedTextField CampoNome = new JFormattedTextField();
-		CampoNome.setBounds(34, 136, 171, 27);
-		contentPane.add(CampoNome);
+		final JFormattedTextField nameField = new JFormattedTextField();
+		nameField.setBounds(34, 136, 171, 27);
+		contentPane.add(nameField);
 		
 		JLabel Senha = new JLabel("Senha");
 		Senha.setBounds(34, 174, 46, 14);
 		contentPane.add(Senha);
 		
-		CampoSenha = new JPasswordField();
-		CampoSenha.setBounds(34, 188, 171, 27);
-		contentPane.add(CampoSenha);
+		passwordField = new JPasswordField();
+		passwordField.setBounds(34, 188, 171, 27);
+		contentPane.add(passwordField);
 		
-		JComboBox CampoSecretaria = new JComboBox();
-		CampoSecretaria.setBounds(262, 85, 198, 27);
-		contentPane.add(CampoSecretaria);
-		
-		JCheckBox PermADM = new JCheckBox("Permiss\u00E3o de Administrador");
-		PermADM.setBounds(262, 138, 198, 23);
-		contentPane.add(PermADM);
+		final JCheckBox isAdmin = new JCheckBox("Permiss\u00E3o de Administrador");
+		isAdmin.setBounds(31, 233, 198, 23);
+		contentPane.add(isAdmin);
 		
 		JButton Cadastro = new JButton("Cadastrar");
-		Cadastro.setBounds(291, 190, 130, 23);
+		Cadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String registration = registrationField.getText();
+				String name = nameField.getText();
+				String pass = passwordField.getText();
+				boolean asAdmin = isAdmin.isSelected();
+				
+				try {
+					
+					// verifica se todos os campos de dados
+					
+					if (registration.isEmpty())
+						throw new Exception("O Campo matricula é obrigatório");
+					else if (name.isEmpty())
+						throw new Exception("O Campo nome é obrigatório");
+					else if (pass.isEmpty())
+						throw new Exception("O Campo senha é obrigatório");
+					
+					
+					// algoritmo de criptografia
+					MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+    				byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));
+    			
+    				StringBuilder hexString = new StringBuilder();
+    				for (byte b : messageDigest)
+    					hexString.append(String.format("%02X", 0xFF & b));
+    			
+    				String cripPass = hexString.toString(); // hash da senha
+    				
+    				
+    				UserControl uc = new UserControl();
+    				User user = new User(Long.parseLong(registration), name, cripPass, asAdmin, true);
+    				if (uc.insertUser(user)){
+    					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
+    					dispose();
+    				}
+    				else
+    					JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar o usuário. Tente novamente mais tarde ou entre em contato com o administrador.");
+    				
+    			
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
+    			
+    			
+				
+			}
+		});
+		Cadastro.setBounds(34, 263, 171, 23);
 		contentPane.add(Cadastro);
 		
 		JLabel TituloCadastro = new JLabel("Cadastro");

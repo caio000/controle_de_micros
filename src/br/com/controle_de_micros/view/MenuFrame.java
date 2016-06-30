@@ -31,12 +31,14 @@ public class MenuFrame extends JFrame {
 	 */
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 450, 321);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-         
+        
+        setLocationRelativeTo(null);
+        
         JLabel computer = new JLabel("");
         computer.setBounds(66, 23, 100, 100);
          
@@ -58,6 +60,15 @@ public class MenuFrame extends JFrame {
         contentPane.add(secretary);
          
         JButton btnLogout = new JButton("");
+        btnLogout.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		dispose();
+        		JFrame login = new LoginFrame();
+        		login.setVisible(true);
+        		
+        	}
+        });
         btnLogout.setBounds(255, 162, 100, 100);
          
         ImageIcon logout = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/logout.png"));

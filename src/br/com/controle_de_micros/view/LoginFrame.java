@@ -48,7 +48,9 @@ public class LoginFrame extends JFrame {
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-         
+        
+        setLocationRelativeTo(null);
+        
         registration = new JTextField();
         registration.setBounds(220, 61, 165, 20);
         contentPane.add(registration);
