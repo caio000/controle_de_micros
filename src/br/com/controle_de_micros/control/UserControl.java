@@ -21,4 +21,9 @@ public class UserControl {
 	public boolean insertUser(User user) {
 		return dao.insert(user);
 	}
+	
+	
+	public boolean makeLogin(User user){
+		return dao.checkUser(user);
+	}
 }

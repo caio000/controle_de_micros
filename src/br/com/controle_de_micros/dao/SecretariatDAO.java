@@ -24,7 +24,6 @@ public class SecretariatDAO extends DAO<Secretariat> {
 
 	@Override
 	public boolean insert(Secretariat objeto) {
-		// TODO Inserir uma nova secretaria na base de dados.
 		
 		String sql = "INSERT INTO Secretariat (name, idAddress, idPhone) VALUES (\'?\', ?, ?);";
 		

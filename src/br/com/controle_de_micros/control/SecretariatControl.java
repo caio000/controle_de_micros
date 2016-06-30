@@ -17,7 +17,16 @@ public class SecretariatControl {
 	}
 	
 	
-	
+	/**
+	 * Essa função recebe uma secretaria e a cadastra na base de dados
+	 * 
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/06/29
+	 * 
+	 * @param secretariat: objeto Secretaria que contem os dados da secretaria que sera cadastrado.
+	 * 
+	 * @return retorna um boolean TRUE caso a secretaria sejá cadatrada com sucesso.
+	 */
 	public boolean insertSecretariat(Secretariat secretariat) {
 		return dao.insert(secretariat);
 	}

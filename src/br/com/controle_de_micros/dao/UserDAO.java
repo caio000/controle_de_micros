@@ -1,5 +1,7 @@
 package br.com.controle_de_micros.dao;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 import br.com.controle_de_micros.database.Database;
@@ -40,6 +42,34 @@ public class UserDAO extends DAO<User>{
 	public List<User> listAll() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	/**
+	 * Essa função verifica se o usuário informado existe na base de dados.
+	 * @author Caio de Freitas Adriano.
+	 * @since 2016/06/29
+	 * @param user: objeto com os dados do usuário.
+	 * @return Retorna um boolena TRUE caso o usuário foi encontrado no banco de dados.
+	 */
+	public boolean checkUser(User user) {
+		
+		boolean result = false;
+		
+		String sql = "SELECT COUNT(*) AS qtd FROM user WHERE registration = ? AND password = \'?\';";
+		
+		sql = sql.replaceFirst("\\?", Long.toString(user.getRegistration()));
+		sql = sql.replaceFirst("\\?", user.getPassword());
+		
+		ResultSet resultDb = database.query(sql);
+		
+		try {
+			if (resultDb.next())
+				result = (resultDb.getInt("qtd") == 1) ? true : false;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 }

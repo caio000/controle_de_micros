@@ -25,6 +25,10 @@ public class User {
 		this(registration, name, password, false, true);
 	}
 	
+	public User(long registration, String password) {
+		this(registration, null, password);
+	}
+	
 	
 	// Métodos
 	

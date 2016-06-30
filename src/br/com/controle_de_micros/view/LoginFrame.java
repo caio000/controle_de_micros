@@ -1,19 +1,24 @@
 package br.com.controle_de_micros.view;
 
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.SystemColor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.security.MessageDigest;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import br.com.controle_de_micros.control.UserControl;
+import br.com.controle_de_micros.model.User;
 
 public class LoginFrame extends JFrame {
 
@@ -71,8 +76,47 @@ public class LoginFrame extends JFrame {
         JButton btnLogin = new JButton("Login");
         btnLogin.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		JFrame menu = new MenuFrame();
-        		menu.setVisible(true);
+        		
+        		String reg = registration.getText();
+        		@SuppressWarnings("deprecation")
+				String pass = password.getText();
+        		
+        		try {
+        			
+        			// verifas se o campo matricula e senha esta vazio
+        			
+        			if (reg.isEmpty()) {
+						throw new Exception("O campo Matricula é obrigatório.");
+					} else if (pass.isEmpty()){
+						throw new Exception("O campo senha é obrigatório");
+					}
+        			
+        			// algoritmo de criptografia
+        			MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+        			byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));
+        			
+        			StringBuilder hexString = new StringBuilder();
+        			for (byte b : messageDigest)
+        				hexString.append(String.format("%02X", 0xFF & b));
+        			
+        			String cripPass = hexString.toString(); // hash da senha
+        			
+        			User user = new User(Long.parseLong(reg), cripPass);
+        			UserControl uc = new UserControl();
+        			
+        			if (uc.makeLogin(user)){
+        				JOptionPane.showMessageDialog(null, "Usuario validado");
+        				dispose();
+        				JFrame menu = new MenuFrame();
+        				menu.setVisible(true);
+        				
+        				
+        			} else
+        				JOptionPane.showMessageDialog(null, "Os dados informados não são validos.");
+					
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+				}
         	}
         });
         btnLogin.setBounds(220, 148, 165, 23);

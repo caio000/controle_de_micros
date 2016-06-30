@@ -27,7 +27,7 @@ public class Secretariat {
 	}
 	
 	
-	// MÃ©todos
+	// Métodos
 	
 	public String getName() {
 		return name;
