@@ -1,25 +1,22 @@
 package br.com.controle_de_micros.view;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.List;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import br.com.controle_de_micros.control.ComputerControl;
-import br.com.controle_de_micros.control.UserControl;
 import br.com.controle_de_micros.model.Computer;
-import br.com.controle_de_micros.model.User;
-
-import javax.swing.JLabel;
-import java.awt.Font;
-import java.util.List;
-
-import javax.swing.JButton;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
 
 public class ComputerFrame extends JFrame {
 
@@ -67,6 +64,14 @@ public class ComputerFrame extends JFrame {
 		contentPane.add(Computadores);
 		
 		JButton buttonNovoMicro = new JButton("Novo Micro");
+		buttonNovoMicro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				dispose();
+				JFrame insertComputer = new RegComputer();
+				insertComputer.setVisible(true);
+			}
+		});
 		buttonNovoMicro.setBounds(446, 72, 119, 23);
 		contentPane.add(buttonNovoMicro);
 		
