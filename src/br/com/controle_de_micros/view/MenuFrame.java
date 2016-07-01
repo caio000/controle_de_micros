@@ -32,6 +32,7 @@ public class MenuFrame extends JFrame {
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setBounds(100, 100, 450, 321);
+        
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -39,14 +40,23 @@ public class MenuFrame extends JFrame {
         
         setLocationRelativeTo(null);
         
-        JLabel computer = new JLabel("");
+        //JLabel computer = new JLabel("");
+        JButton computer = new JButton("");
+        computer.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent e) {
+        		
+        		JFrame user = new ComputerFrame();
+        		user.setVisible(isBackgroundSet());
+        	}
+        });
         computer.setBounds(66, 23, 100, 100);
+        contentPane.add(computer);
          
         ImageIcon comp = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/computer.png"));
         Image comput = comp.getImage().getScaledInstance(computer.getWidth(), computer.getHeight(), Image.SCALE_SMOOTH);
         computer.setIcon(new ImageIcon(comput));
          
-        contentPane.add(computer);
+        //contentPane.add(computer);
          
          
          
@@ -112,6 +122,7 @@ public class MenuFrame extends JFrame {
         lblSecretarias.setFont(new Font("Tahoma", Font.BOLD, 15));
         lblSecretarias.setBounds(66, 143, 100, 14);
         contentPane.add(lblSecretarias);
+        
+      
 	}
-
 }
