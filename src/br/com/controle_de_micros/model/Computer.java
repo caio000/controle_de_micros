@@ -15,6 +15,10 @@ public class Computer {
 	
 	// Construtores
 	
+	public Computer() {
+		
+	}
+	
 	public Computer(long ctis, Secretariat secretariat, String hostname, String ip, String macAddress, String serial, String model, boolean isActive) {
 		this.ctis = ctis;
 		this.secretariat = secretariat;

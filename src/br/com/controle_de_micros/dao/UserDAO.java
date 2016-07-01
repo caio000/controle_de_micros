@@ -2,6 +2,7 @@ package br.com.controle_de_micros.dao;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import br.com.controle_de_micros.database.Database;
@@ -40,8 +41,26 @@ public class UserDAO extends DAO<User>{
 
 	@Override
 	public List<User> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		List<User> list = new ArrayList<>();
+		
+		String query = "SELECT registration, name, isActive FROM user;";
+		
+		ResultSet result = database.query(query);
+		
+		try {
+			while (result.next()){
+				User user = new User();
+				user.setRegistration(result.getLong("registration"));
+				user.setName(result.getString("name"));
+				user.setActive(result.getBoolean("isActive"));
+				
+				list.add(user);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return list;
 	}
 	
 	/**

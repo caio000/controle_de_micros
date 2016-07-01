@@ -48,8 +48,6 @@ public class SecretariatDAO extends DAO<Secretariat> {
 
 	@Override
 	public List<Secretariat> listAll() {
-		// TODO Listar todas as secretarias cadastradas na bade de dados.
-		
 		List<Secretariat> list = new ArrayList<Secretariat>();
 		
 		String query = "SELECT idSecretariat, name, a.*, p.idPhone, p.number AS phone FROM secretariat AS sec "

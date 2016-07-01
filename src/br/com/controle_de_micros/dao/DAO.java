@@ -13,6 +13,8 @@ public abstract class DAO<E> {
 	}
 	
 	/**
+	 * Cadastra os dados o objeto no banco de dados.
+	 * 
 	 * @author Caio de Freitas Adriano
 	 * @since 2016-06-23
 	 * @param objeto dado do objeto que será inserido no banco de dados
@@ -23,7 +25,14 @@ public abstract class DAO<E> {
 	public abstract boolean update(E objeto);
 	
 	public abstract boolean delete(E objeto);
-	
+	/**
+	 * Lista os dados de todos os objetos cadastrados no banco de dados.
+	 * 
+	 * @author caio
+	 * @since 2016/06/30
+	 *  
+	 * @return Retorna uma lista com todos os dados encontrados.
+	 */
 	public abstract List<E> listAll();
 
 }

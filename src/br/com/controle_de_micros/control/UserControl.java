@@ -1,5 +1,7 @@
 package br.com.controle_de_micros.control;
 
+import java.util.List;
+
 import br.com.controle_de_micros.dao.UserDAO;
 import br.com.controle_de_micros.database.Database;
 import br.com.controle_de_micros.database.MariaDatabase;
@@ -19,7 +21,7 @@ public class UserControl {
 	// MÃ©todos
 	
 	/**
-	 * Essa funcção cadastra um novo usuario na base de dados
+	 * Essa função cadastra um novo usuario na base de dados
 	 * 
 	 * @author Caio de Freitas Adriano
 	 * @since 2016/06/26
@@ -43,4 +45,9 @@ public class UserControl {
 	public boolean makeLogin(User user){
 		return dao.checkUser(user);
 	}
+	
+	public List<User> listUsers() {
+		return dao.listAll();
+	}
+	
 }

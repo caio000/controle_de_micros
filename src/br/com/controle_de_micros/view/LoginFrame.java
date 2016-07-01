@@ -107,7 +107,6 @@ public class LoginFrame extends JFrame {
         			UserControl uc = new UserControl();
         			
         			if (uc.makeLogin(user)){
-        				JOptionPane.showMessageDialog(null, "Usuario validado");
         				dispose();
         				JFrame menu = new MenuFrame();
         				menu.setVisible(true);

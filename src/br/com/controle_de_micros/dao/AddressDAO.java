@@ -1,6 +1,7 @@
 package br.com.controle_de_micros.dao;
 
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,9 +46,20 @@ public class AddressDAO extends DAO<Address> {
 
 	@Override
 	public List<Address> listAll() {
-		// TODO Auto-generated method stub
-		
 		List<Address> list = new ArrayList<>();
+		
+		String sql = "SELECT * FROM address;";
+		
+		ResultSet result = database.query(sql);
+		
+		try {
+			while (result.next()) {
+				Address address = new Address(result.getLong("idAddress"), result.getString("publicPlace"), result.getString("neighborhood"), result.getInt("number"));
+				list.add(address);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return list;
 	}

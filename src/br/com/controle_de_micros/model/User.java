@@ -13,6 +13,10 @@ public class User {
 	
 	// Construtor
 	
+	public User() {
+		
+	}
+	
 	public User(long registration, String name, String password, boolean isAdmin, boolean isActive) {
 		this.registration = registration;
 		this.name = name;

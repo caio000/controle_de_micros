@@ -79,7 +79,7 @@ public class MenuFrame extends JFrame {
         JButton btnUser = new JButton("");
         btnUser.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		JFrame user = new UserFrame();
+        		JFrame user = new UsersFrame();
         		user.setVisible(isBackgroundSet());
         	}
         });

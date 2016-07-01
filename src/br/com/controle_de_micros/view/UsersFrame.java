@@ -1,9 +1,9 @@
 package br.com.controle_de_micros.view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,41 +14,31 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-public class usersFrame extends JFrame {
+import br.com.controle_de_micros.control.UserControl;
+import br.com.controle_de_micros.model.User;
 
+public class UsersFrame extends JFrame {
+
+	private static final long serialVersionUID = 764469292580682824L;
 	private JPanel contentPane;
 	private JTable table;
-
-	/**
-	 * Launch the application.
-	 */
+	
+	private String[] header  = new String[]{"Matricula","Nome","Status"};
+	private String[][] valores;
+	private DefaultTableModel model = new DefaultTableModel(valores, header);
 	
 	
-	String[] header  = new String[]{"Matricula","Nome","Ação"};
-	String[][] valores = new String[0][3];
-	DefaultTableModel model = new DefaultTableModel(valores, header);
-	
-	
-	
-	public static void main(String[] args) {
-		
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					usersFrame frame = new usersFrame();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	public UsersFrame() {
+		showUsers();
+		initComponents();
 	}
-
+	
+	
 	/**
 	 * Create the frame.
 	 */
-	public usersFrame() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+	private void initComponents() {
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 493, 326);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -59,9 +49,9 @@ public class usersFrame extends JFrame {
 		ButtonNovo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String[] linha = new String[]{"255", "storm" , "Mudar ainda"};
-
-				model.addRow(linha);
+				dispose();
+				JFrame insertUser = new RegisterFrame();
+				insertUser.setVisible(true);
 			}
 		});
 		ButtonNovo.setBounds(299, 65, 133, 23);
@@ -73,11 +63,27 @@ public class usersFrame extends JFrame {
 		contentPane.add(TituloUsuarios);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 112, 400, 176);
+		scrollPane.setBounds(32, 99, 400, 176);
 		contentPane.add(scrollPane);
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
 		table.setModel(model);
+	}
+	
+	private void showUsers () {
+		UserControl uc = new UserControl();
+		List<User> users = uc.listUsers();
+		
+		for (User u : users){
+			String[] linha = new String[]{
+				Long.toString(u.getRegistration()),
+				u.getName(),
+				(u.isActive()) ? "Ativo" : "Desativado"
+			};
+			
+			model.addRow(linha);
+		}
+		
 	}
 }

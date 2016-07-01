@@ -1,5 +1,7 @@
 package br.com.controle_de_micros.control;
 
+import java.util.List;
+
 import br.com.controle_de_micros.dao.ComputerDAO;
 import br.com.controle_de_micros.database.Database;
 import br.com.controle_de_micros.database.MariaDatabase;
@@ -25,5 +27,9 @@ public class ComputerControl {
 	 */
 	public boolean inserComputer(Computer computer){
 		return dao.insert(computer);
+	}
+	
+	public List<Computer> listComputer () {
+		return dao.listAll();
 	}
 }

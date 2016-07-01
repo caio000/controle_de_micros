@@ -11,6 +11,10 @@ public class Phone {
 	
 	// Contrutor
 	
+	public Phone() {
+		
+	}
+	
 	public Phone(long idPhone, String number) {
 		this.idPhone = idPhone;
 		this.number = number;
