@@ -4,7 +4,6 @@ import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.security.MessageDigest;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -67,9 +66,11 @@ public class RegComputer extends JFrame {
 		Secretaria.setBounds(22, 134, 73, 14);
 		contentPane.add(Secretaria);
 		
-		JComboBox secretaria = new JComboBox();
+		final JFormattedTextField secretaria = new  JFormattedTextField();
 		secretaria.setBounds(22, 150, 173, 20);
 		contentPane.add(secretaria);
+		
+		
 		
 		JLabel Hostname = new JLabel("HostName");
 		Hostname.setBounds(22, 175, 73, 14);
@@ -102,6 +103,7 @@ public class RegComputer extends JFrame {
 				
 				String registration = ctis.getText();
 				String hostname = campoHost.getText();
+				String secretariat = secretaria.getText();
 				String ip = ips.getText();
 				String model = CampoModelo.getText();
 				//@SuppressWarnings("deprecation")
@@ -123,11 +125,11 @@ public class RegComputer extends JFrame {
 					
 					
 					
-    				
-    				
-    				ComputerControl uc = new ComputerControl();
-    				Computer comp = new Computer(Long.parseLong(registration), secretaria, hostname, ip, model, true);
-    				if (uc.inserComputer(comp)){
+				
+							
+   			ComputerControl uc = new ComputerControl();
+    				Computer computer = new Computer(Long.parseLong(registration), null, secretariat, hostname, ip, model, model, true);
+    				if (uc.inserComputer(computer)){
     					JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!");
     					dispose();
     				}
@@ -150,6 +152,8 @@ public class RegComputer extends JFrame {
 		TituloCadastro.setFont(new Font("Tahoma", Font.BOLD, 25));
 		TituloCadastro.setBounds(34, 22, 130, 27);
 		contentPane.add(TituloCadastro);
+		
+		
+
 	}
-	
 }
