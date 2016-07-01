@@ -54,11 +54,6 @@ public class RegComputer extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JLabel Registrocomputador = new JLabel("Cadastro");
-		Registrocomputador.setFont(new Font("Tahoma", Font.BOLD, 25));
-		Registrocomputador.setBounds(10, 24, 145, 28);
-		contentPane.add(Registrocomputador);
-		
 		JLabel lblCtis = new JLabel("CTIS");
 		lblCtis.setBounds(22, 94, 46, 14);
 		contentPane.add(lblCtis);
@@ -148,17 +143,13 @@ public class RegComputer extends JFrame {
 		});
 		//btnNewButton.setBounds(66, 341, 112, 23);
 		//contentPane.add(btnNewButton);
-		Cadastro.setBounds(34, 263, 171, 23);
+		Cadastro.setBounds(24, 325, 171, 23);
 		contentPane.add(Cadastro);
 		
 		JLabel TituloCadastro = new JLabel("Cadastro");
 		TituloCadastro.setFont(new Font("Tahoma", Font.BOLD, 25));
 		TituloCadastro.setBounds(34, 22, 130, 27);
 		contentPane.add(TituloCadastro);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(34, 72, 46, 14);
-		contentPane.add(lblNewLabel);
 	}
 	
 }
