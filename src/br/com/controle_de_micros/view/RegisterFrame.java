@@ -72,6 +72,7 @@ public class RegisterFrame extends JFrame {
 				
 				String registration = registrationField.getText();
 				String name = nameField.getText();
+				@SuppressWarnings("deprecation")
 				String pass = passwordField.getText();
 				boolean asAdmin = isAdmin.isSelected();
 				
@@ -80,11 +81,11 @@ public class RegisterFrame extends JFrame {
 					// verifica se todos os campos de dados
 					
 					if (registration.isEmpty())
-						throw new Exception("O Campo matricula È obrigatÛrio");
+						throw new Exception("O Campo matricula √© obrigat√≥rio");
 					else if (name.isEmpty())
-						throw new Exception("O Campo nome È obrigatÛrio");
+						throw new Exception("O Campo nome √© obrigat√≥rio");
 					else if (pass.isEmpty())
-						throw new Exception("O Campo senha È obrigatÛrio");
+						throw new Exception("O Campo senha √© obrigat√≥rio");
 					
 					
 					// algoritmo de criptografia
@@ -101,11 +102,11 @@ public class RegisterFrame extends JFrame {
     				UserControl uc = new UserControl();
     				User user = new User(Long.parseLong(registration), name, cripPass, asAdmin, true);
     				if (uc.insertUser(user)){
-    					JOptionPane.showMessageDialog(null, "Usu·rio cadastrado com sucesso!");
+    					JOptionPane.showMessageDialog(null, "Usu√°rio cadastrado com sucesso!");
     					dispose();
     				}
     				else
-    					JOptionPane.showMessageDialog(null, "N„o foi possivel cadastrar o usu·rio. Tente novamente mais tarde ou entre em contato com o administrador.");
+    					JOptionPane.showMessageDialog(null, "N√£o foi possivel cadastrar o usu√°rio. Tente novamente mais tarde ou entre em contato com o administrador.");
     				
     			
 				} catch (Exception e) {

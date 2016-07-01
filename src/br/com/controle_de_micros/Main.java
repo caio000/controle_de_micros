@@ -2,7 +2,6 @@ package br.com.controle_de_micros;
 
 import javax.swing.JFrame;
 
-import br.com.controle_de_micros.control.ComputerControl;
 import br.com.controle_de_micros.view.LoginFrame;
 
 public class Main {

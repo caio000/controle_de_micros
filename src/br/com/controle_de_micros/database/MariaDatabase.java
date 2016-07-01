@@ -12,19 +12,14 @@ public class MariaDatabase implements Database {
 	// Atributos
 	
 	private String username;
-	
 	private String password;
-	
 	private String databaseName;
-	
 	private String host;
-	
 	private int port;
-	
 	private Connection connection;
 	
 	
-	// M�todo Construtor
+	// Método Construtor
 	
 	public MariaDatabase(String host, String username, String password, String databaseName, int port) {
 		this.host = host;
@@ -42,7 +37,7 @@ public class MariaDatabase implements Database {
 		this("localhost", username, password, databaseName, 3306);
 	}
 	
-	// M�todos
+	// Métodos
 
 	@Override
 	public boolean connect() {
@@ -114,14 +109,51 @@ public class MariaDatabase implements Database {
 
 	@Override
 	public boolean update(String sql) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = true;
+		
+		PreparedStatement stmt;
+		
+		try {
+			
+			if (this.connection != null && !this.connection.isClosed()) {
+				stmt = this.connection.prepareStatement(sql);
+				stmt.execute();
+				
+				stmt.close();
+				connection.close();
+			} else {
+				throw new Exception("Database is not connected!");
+			}
+		} catch (Exception e) {
+			result = false;
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override
 	public boolean delete(String sql) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean result = true;
+		
+		PreparedStatement stmt;
+		try{
+			
+			if (connection != null && !connection.isClosed()) {
+				stmt = this.connection.prepareStatement(sql);
+				stmt.execute();
+				
+				stmt.close();
+				connection.close();
+			} else {
+				result = false;
+				throw new Exception("Database is not connected.");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return result;
 	}
 
 	@Override

@@ -22,9 +22,6 @@ import br.com.controle_de_micros.model.User;
 
 public class LoginFrame extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 8631973804898034171L;
 	private JPanel contentPane;
 	private JTextField registration;
@@ -88,9 +85,9 @@ public class LoginFrame extends JFrame {
         			// verifas se o campo matricula e senha esta vazio
         			
         			if (reg.isEmpty()) {
-						throw new Exception("O campo Matricula é obrigatório.");
+						throw new Exception("O campo Matricula Ã© obrigatÃ³rio.");
 					} else if (pass.isEmpty()){
-						throw new Exception("O campo senha é obrigatório");
+						throw new Exception("O campo senha Ã© obrigatÃ³rio");
 					}
         			
         			// algoritmo de criptografia
@@ -113,7 +110,7 @@ public class LoginFrame extends JFrame {
         				
         				
         			} else
-        				JOptionPane.showMessageDialog(null, "Os dados informados não são validos.");
+        				JOptionPane.showMessageDialog(null, "Os dados informados nï¿½o sï¿½o validos.");
 					
 				} catch (Exception e) {
 					JOptionPane.showMessageDialog(null, e.getMessage());

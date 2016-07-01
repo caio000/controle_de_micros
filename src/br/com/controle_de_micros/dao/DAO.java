@@ -21,9 +21,21 @@ public abstract class DAO<E> {
 	 * @return boolean TRUE caso o objeto seja inserido com sucesso.
 	 */
 	public abstract boolean insert(E objeto);
-	
+	/**
+	 * Atualiza os dados do objeto no banco de dados.
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/06/28
+	 * @param objeto com os dados que serão alterados no banco de dados.
+	 * @return Retorna um boolean TRUE caso a alteração foi realizada com sucesso. 
+	 */
 	public abstract boolean update(E objeto);
-	
+	/**
+	 * Deleta o objeto informado da base de dados.
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/07/01
+	 * @param objeto que será deletado.
+	 * @return Retorna um boolean TRUE caso o objeto seja deletado com sucesso.
+	 */
 	public abstract boolean delete(E objeto);
 	/**
 	 * Lista os dados de todos os objetos cadastrados no banco de dados.

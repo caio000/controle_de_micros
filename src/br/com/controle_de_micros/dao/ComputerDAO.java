@@ -19,7 +19,7 @@ public class ComputerDAO extends DAO<Computer> {
 		database.connect();
 	}
 
-	// Métodos
+	// MÃ©todos
 
 	@Override
 	public boolean insert(Computer computer) {
@@ -38,15 +38,23 @@ public class ComputerDAO extends DAO<Computer> {
 	}
 
 	@Override
-	public boolean update(Computer objeto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean update(Computer computer) {
+		
+		String sql = "UPDATE computer SET hostname = \'?\', ip = \'?\' WHERE ctis = ?;";
+		
+		sql = sql.replaceFirst("\\?", computer.getHostname().toUpperCase());
+		sql = sql.replaceFirst("\\?", computer.getIp());
+		sql = sql.replaceFirst("\\?", Long.toString(computer.getCtis()));
+		
+		return database.update(sql);
 	}
 
 	@Override
-	public boolean delete(Computer objeto) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean delete(Computer computer) {
+		
+		String sql = "UPDATE computer SET isActive = false;";
+		
+		return database.delete(sql);
 	}
 
 	@Override

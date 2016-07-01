@@ -3,6 +3,8 @@ package br.com.controle_de_micros.view;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -66,7 +68,22 @@ public class UsersFrame extends JFrame {
 		scrollPane.setBounds(32, 99, 400, 176);
 		contentPane.add(scrollPane);
 		
-		table = new JTable();
+		table = new JTable() {
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column) {
+				return false;
+			};
+		};
+		table.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent e) {
+				if (e.getClickCount() == 2){
+					int line = table.getSelectedRow();
+					
+					System.out.println(table.getValueAt(line, 0));
+				}
+			}
+		});
 		scrollPane.setViewportView(table);
 		table.setModel(model);
 	}
