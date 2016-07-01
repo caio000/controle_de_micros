@@ -123,5 +123,9 @@ public class RegisterFrame extends JFrame {
 		TituloCadastro.setFont(new Font("Tahoma", Font.BOLD, 25));
 		TituloCadastro.setBounds(34, 22, 130, 27);
 		contentPane.add(TituloCadastro);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(34, 72, 46, 14);
+		contentPane.add(lblNewLabel);
 	}
 }
