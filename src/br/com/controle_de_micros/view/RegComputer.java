@@ -1,12 +1,10 @@
 package br.com.controle_de_micros.view;
 
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -16,37 +14,24 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import br.com.controle_de_micros.control.ComputerControl;
+import br.com.controle_de_micros.model.Address;
 import br.com.controle_de_micros.model.Computer;
+import br.com.controle_de_micros.model.Phone;
+import br.com.controle_de_micros.model.Secretariat;
 
 public class RegComputer extends JFrame {
 
+	private static final long serialVersionUID = -4590146163039564882L;
 	private JPanel contentPane;
-	private JTextField Ctis;
 	private JTextField campoHost;
-	private JTextField textField;
-	private JTextField CampoModelo;
 
 	public RegComputer() {
 		initComponent();
 	}
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					RegComputer frame = new RegComputer();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	
 
-	/**
-	 * Create the frame.
-	 */
 	public void initComponent() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 261, 466);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -101,45 +86,23 @@ public class RegComputer extends JFrame {
 		Cadastro.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				
-				String registration = ctis.getText();
-				String hostname = campoHost.getText();
-				String secretariat = secretaria.getText();
-				String ip = ips.getText();
-				String model = CampoModelo.getText();
-				//@SuppressWarnings("deprecation")
-				//String pass = passwordField.getText();
-				//boolean asAdmin = isAdmin.isSelected();
+				String id = ctis.getText();
 				
-				try {
-					
-					// verifica se todos os campos de dados
-					
-					if (registration.isEmpty())
-						throw new Exception("O Campo matricula é obrigatório");
-					else if (hostname.isEmpty())
-						throw new Exception("O campo hostname é obrigatório");
-					else if (ip.isEmpty())
-						throw new Exception("O Campo ip é obrigatório");
-					else if (model.isEmpty())
-						throw new Exception("O Campo modelo é obrigatório");
-					
-					
-					
 				
-							
-   			ComputerControl uc = new ComputerControl();
-    				Computer computer = new Computer(Long.parseLong(registration), null, secretariat, hostname, ip, model, model, true);
-    				if (uc.inserComputer(computer)){
-    					JOptionPane.showMessageDialog(null, "UsuÃ¡rio cadastrado com sucesso!");
-    					dispose();
-    				}
-    				else
-    					JOptionPane.showMessageDialog(null, "NÃ£o foi possivel cadastrar o usuÃ¡rio. Tente novamente mais tarde ou entre em contato com o administrador.");
-    				
+				
+    			Phone phone = new Phone(2, "3882-3301");
+    			Address address = new Address(4, "testes", "teste", 512);
+    			Secretariat sec = new Secretariat(2, "saude", address, phone);
     			
-				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
-				}
+    			Computer pc = new Computer(25, sec, "pc-12-50", "192.168.12.50", "teste", "teste", "desktop", true);
+    			
+    			ComputerControl cc = new ComputerControl();
+    			
+    			if (cc.inserComputer(pc))
+    				JOptionPane.showMessageDialog(null, "Micro cadastrado com sucesso!");
+    			else
+    				JOptionPane.showMessageDialog(null, "Não foi possivel cadastrar, tente novamente mais tarde ou entre em contato com o administrador");
+    			
     			
 			}
 		});

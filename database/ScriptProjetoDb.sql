@@ -52,11 +52,11 @@ DROP TABLE IF EXISTS `computer`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `computer` (
   `ctis` int(11) NOT NULL,
-  `idSecretariat` int(11) NOT NULL,
+  `idSecretariat` int(11) NULL,
   `hostname` varchar(45) DEFAULT NULL,
   `ip` varchar(15) NOT NULL,
   `macAddress` varchar(45) DEFAULT NULL,
-  `serial` varchar(45) NOT NULL,
+  `serial` varchar(45) NULL,
   `model` varchar(45) DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`ctis`),
