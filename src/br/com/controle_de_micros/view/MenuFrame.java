@@ -1,6 +1,9 @@
 package br.com.controle_de_micros.view;
 
+import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -8,9 +11,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.Font;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
+import br.com.controle_de_micros.control.SessionControl;
 
 public class MenuFrame extends JFrame {
 
@@ -31,7 +33,7 @@ public class MenuFrame extends JFrame {
 	 */
 	private void initComponents() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setBounds(100, 100, 450, 321);
+        setBounds(100, 100, 450, 382);
         
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -49,7 +51,7 @@ public class MenuFrame extends JFrame {
         		user.setVisible(isBackgroundSet());
         	}
         });
-        computer.setBounds(66, 23, 100, 100);
+        computer.setBounds(66, 66, 100, 100);
         contentPane.add(computer);
          
         ImageIcon comp = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/computer.png"));
@@ -61,7 +63,7 @@ public class MenuFrame extends JFrame {
          
          
         JLabel secretary = new JLabel("");
-        secretary.setBounds(66, 162, 100, 100);
+        secretary.setBounds(66, 214, 100, 100);
          
         ImageIcon secret = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/secretaria.png"));
         Image secre = secret.getImage().getScaledInstance(secretary.getWidth(), secretary.getHeight(), Image.SCALE_SMOOTH);
@@ -79,7 +81,7 @@ public class MenuFrame extends JFrame {
         		
         	}
         });
-        btnLogout.setBounds(255, 162, 100, 100);
+        btnLogout.setBounds(255, 214, 100, 100);
          
         ImageIcon logout = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/logout.png"));
         Image log = logout.getImage().getScaledInstance(btnLogout.getWidth(), btnLogout.getHeight(), Image.SCALE_SMOOTH); 
@@ -93,7 +95,7 @@ public class MenuFrame extends JFrame {
         		user.setVisible(isBackgroundSet());
         	}
         });
-        btnUser.setBounds(255, 23, 100, 100);
+        btnUser.setBounds(255, 66, 100, 100);
         
          
         ImageIcon User = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/user.png"));
@@ -105,24 +107,28 @@ public class MenuFrame extends JFrame {
          
         JLabel lblComputadores = new JLabel("Computadores");
         lblComputadores.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lblComputadores.setBounds(66, 9, 115, 14);
+        lblComputadores.setBounds(66, 41, 115, 14);
         contentPane.add(lblComputadores);
          
         JLabel lblLogout = new JLabel("Logout");
         lblLogout.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lblLogout.setBounds(255, 143, 100, 14);
+        lblLogout.setBounds(255, 189, 100, 14);
         contentPane.add(lblLogout);
          
         JLabel lblUsuarios = new JLabel("Usuarios");
         lblUsuarios.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lblUsuarios.setBounds(255, 9, 100, 14);
+        lblUsuarios.setBounds(255, 41, 100, 14);
         contentPane.add(lblUsuarios);
          
         JLabel lblSecretarias = new JLabel("Secretarias");
         lblSecretarias.setFont(new Font("Tahoma", Font.BOLD, 15));
-        lblSecretarias.setBounds(66, 143, 100, 14);
+        lblSecretarias.setBounds(66, 189, 100, 14);
         contentPane.add(lblSecretarias);
         
-      
+        String message = "O Usuário " + SessionControl.getInstance().getUser().getName().toUpperCase() + " esta logado";
+        JLabel lblTeste = new JLabel(message);
+        lblTeste.setBounds(255, 16, 169, 14);
+        contentPane.add(lblTeste);
+        
 	}
 }

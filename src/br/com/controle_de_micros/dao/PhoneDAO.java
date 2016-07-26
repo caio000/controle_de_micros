@@ -25,19 +25,19 @@ public class PhoneDAO extends DAO<Phone>{
 
 	@Override
 	public boolean update(Phone phone) {
-		// TODO Auto-generated method stub
+		// TODO Atualizar o numero de telefone.
 		return false;
 	}
 
 	@Override
 	public boolean delete(Phone phone) {
-		// TODO Auto-generated method stub
+		// TODO Deletar telefone
 		return false;
 	}
 
 	@Override
 	public List<Phone> listAll() {
-		// TODO Auto-generated method stub
+		// TODO Listar todos os telefones cadastrados.
 		return null;
 	}
 	

@@ -21,7 +21,7 @@ public class UserControl {
 	// MÃ©todos
 	
 	/**
-	 * Essa função cadastra um novo usuario na base de dados
+	 * Essa funÃ§Ã£o cadastra um novo usuario na base de dados
 	 * 
 	 * @author Caio de Freitas Adriano
 	 * @since 2016/06/26
@@ -34,7 +34,7 @@ public class UserControl {
 	}
 	
 	/**
-	 * Essa função libera ou nao o acesso ao sistema para o usuario informado
+	 * Essa funÃ§Ã£o libera ou nao o acesso ao sistema para o usuario informado
 	 * 
 	 * @author Caio de Freitas Adriano
 	 * @since 2016/06/29
@@ -50,4 +50,8 @@ public class UserControl {
 		return dao.listAll();
 	}
 	
+	
+	public User getUser (long idUser) {
+		return dao.getUser(idUser);
+	}
 }

@@ -17,7 +17,6 @@ public class UserDAO extends DAO<User>{
 
 	@Override
 	public boolean insert(User user) {
-		// TODO Auto-generated method stub
 		String sql = "INSERT INTO user (registration, name, password) VALUES (?, \'?\', \'?\');";
 		
 		sql = sql.replaceFirst("\\?", Long.toString(user.getRegistration()));
@@ -29,13 +28,13 @@ public class UserDAO extends DAO<User>{
 
 	@Override
 	public boolean update(User user) {
-		// TODO Auto-generated method stub
+		// TODO Atualizar os dados do usuario.
 		return false;
 	}
 
 	@Override
 	public boolean delete(User user) {
-		// TODO Auto-generated method stub
+		// TODO Mudar o status do usuário.
 		return false;
 	}
 
@@ -89,6 +88,38 @@ public class UserDAO extends DAO<User>{
 		}
 		
 		return result;
+	}
+	/**
+	 * Essa função recebe o ID do usuário e retorna um objeto com todos os seus dados.
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/07/25
+	 * @param idUser ID do usuário
+	 * @return Retorna um objeto User que contem todos os dados do usuário na base de dados.
+	 */
+	public User getUser (long registration) {
+		
+		User user = null;
+		String sql = "SELECT * FROM User WHERE registration = ?;";
+		
+		sql = sql.replaceFirst("\\?", Long.toString(registration));
+		
+		ResultSet resultDb = database.query(sql);
+		
+		try {
+			
+			if (resultDb.next()) {
+				String name = resultDb.getString("name");
+				boolean isAdmin = resultDb.getBoolean("isAdmin");
+				boolean isActive = resultDb.getBoolean("isActive");
+				
+				user = new User(registration, name, null, isAdmin, isActive);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
 	}
 
 }

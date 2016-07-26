@@ -10,6 +10,7 @@ public class Main {
 
 		JFrame login = new LoginFrame();
 		login.setVisible(true);
+		
 	}
 
 }

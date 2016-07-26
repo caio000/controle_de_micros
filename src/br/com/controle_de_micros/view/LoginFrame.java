@@ -17,6 +17,7 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import br.com.controle_de_micros.control.SessionControl;
 import br.com.controle_de_micros.control.UserControl;
 import br.com.controle_de_micros.model.User;
 
@@ -82,7 +83,7 @@ public class LoginFrame extends JFrame {
         		
         		try {
         			
-        			// verifas se o campo matricula e senha esta vazio
+        			// verica se o campo matricula e senha esta vazio
         			
         			if (reg.isEmpty()) {
 						throw new Exception("O campo Matricula é obrigatório.");
@@ -100,20 +101,23 @@ public class LoginFrame extends JFrame {
         			
         			String cripPass = hexString.toString(); // hash da senha
         			
-        			User user = new User(Long.parseLong(reg), cripPass);
         			UserControl uc = new UserControl();
+        			User user = uc.getUser(Long.parseLong(reg));
+        			user.setPassword(cripPass);
         			
         			if (uc.makeLogin(user)){
+        				JOptionPane.showMessageDialog(contentPane, "usuario valido");
+        				SessionControl session = new SessionControl();
+        				session.setUser(user); // Cria sessao do usuário.
+        				
         				dispose();
         				JFrame menu = new MenuFrame();
         				menu.setVisible(true);
-        				
-        				
         			} else
-        				JOptionPane.showMessageDialog(null, "Os dados informados n�o s�o validos.");
+        				JOptionPane.showMessageDialog(null, "Os dados informados não são validos.");
 					
 				} catch (Exception e) {
-					JOptionPane.showMessageDialog(null, e.getMessage());
+					
 				}
         	}
         });

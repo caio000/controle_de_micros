@@ -34,13 +34,13 @@ public class AddressDAO extends DAO<Address> {
 
 	@Override
 	public boolean update(Address address) {
-		// TODO Auto-generated method stub
+		// TODO Atualizar os dados de endereço
 		return false;
 	}
 
 	@Override
 	public boolean delete(Address address) {
-		// TODO Auto-generated method stub
+		// TODO Deletar um endereço cadastrado
 		return false;
 	}
 

@@ -55,6 +55,7 @@ public class MariaDatabase implements Database {
 		} catch (Exception e) {
 			result = false;
 			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, e.getMessage());
 		}
 		
 		return result;

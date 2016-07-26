@@ -39,8 +39,9 @@ public class SecretariatDAO extends DAO<Secretariat> {
 		// TODO Atualizar os dados da secretaria
 		return false;
 	}
-
+	
 	@Override
+
 	public boolean delete(Secretariat objeto) {
 		// TODO Deletar a secretaria da base de dados.
 		return false;
