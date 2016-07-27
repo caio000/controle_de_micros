@@ -105,7 +105,6 @@ public class RegComputer extends JFrame {
     			String pcMac = macAddress.getText();
     			String pcIp = ips.getText();
     			
-    			// TODO cadastrar o novo micro na base de dados.
     			/*
     			 * Vou percorrendo toda a lista de secretarias
     			 * procurando a secretaria que o usuário
@@ -121,9 +120,10 @@ public class RegComputer extends JFrame {
     			try {
     				Computer pc = new Computer(Long.parseLong(pcCtis), sec, pcHost, pcIp, pcMac, numSerial, pcModelo);
     				ComputerControl cc = new ComputerControl();
-    				if (cc.inserComputer(pc))
+    				if (cc.inserComputer(pc)) {
     					JOptionPane.showMessageDialog(contentPane, "Micro cadastrado com sucesso!");
-    				else
+    					dispose();
+    				} else
     					throw new Exception("Não foi possivel cadastrar o micro, tente novamente mais tarde.");
     			}catch (Exception e) {
     				JOptionPane.showMessageDialog(contentPane, e.getMessage());

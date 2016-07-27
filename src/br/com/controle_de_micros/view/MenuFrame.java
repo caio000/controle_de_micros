@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -42,13 +43,12 @@ public class MenuFrame extends JFrame {
         
         setLocationRelativeTo(null);
         
-        //JLabel computer = new JLabel("");
+        // BOTÃO COMPUTADORES
         JButton computer = new JButton("");
         computer.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent e) {
-        		
-        		JFrame user = new ComputerFrame();
-        		user.setVisible(isBackgroundSet());
+       			JFrame user = new ComputerFrame();
+       			user.setVisible(isBackgroundSet());
         	}
         });
         computer.setBounds(66, 66, 100, 100);
@@ -58,19 +58,8 @@ public class MenuFrame extends JFrame {
         Image comput = comp.getImage().getScaledInstance(computer.getWidth(), computer.getHeight(), Image.SCALE_SMOOTH);
         computer.setIcon(new ImageIcon(comput));
          
-        //contentPane.add(computer);
-         
-         
-         
-        JLabel secretary = new JLabel("");
-        secretary.setBounds(66, 214, 100, 100);
-         
-        ImageIcon secret = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/secretaria.png"));
-        Image secre = secret.getImage().getScaledInstance(secretary.getWidth(), secretary.getHeight(), Image.SCALE_SMOOTH);
-        secretary.setIcon(new ImageIcon(secre));
-         
-        contentPane.add(secretary);
-         
+        
+        // BOTAO LOGOUT
         JButton btnLogout = new JButton("");
         btnLogout.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
@@ -87,12 +76,18 @@ public class MenuFrame extends JFrame {
         Image log = logout.getImage().getScaledInstance(btnLogout.getWidth(), btnLogout.getHeight(), Image.SCALE_SMOOTH); 
         btnLogout.setIcon(new ImageIcon(log));
         contentPane.add(btnLogout);
-         
+        
+        // BOTÃO USUÁRIO
         JButton btnUser = new JButton("");
         btnUser.addActionListener(new ActionListener() {
         	public void actionPerformed(ActionEvent arg0) {
-        		JFrame user = new UsersFrame();
-        		user.setVisible(isBackgroundSet());
+        		
+        		if (SessionControl.getInstance().getUser().isAdmin()) {
+        			JFrame user = new UsersFrame();
+        			user.setVisible(isBackgroundSet());
+        		} else {
+        			JOptionPane.showMessageDialog(contentPane, "Você não tem permissão para acessar essa funcionalidade");
+        		}
         	}
         });
         btnUser.setBounds(255, 66, 100, 100);
@@ -129,6 +124,27 @@ public class MenuFrame extends JFrame {
         JLabel lblTeste = new JLabel(message);
         lblTeste.setBounds(255, 16, 169, 14);
         contentPane.add(lblTeste);
+        
+        // BOTÃO SECRETARIA
+        JButton btnSecretariat = new JButton("");
+        btnSecretariat.addActionListener(new ActionListener() {
+        	public void actionPerformed(ActionEvent arg0) {
+        		
+        		if (SessionControl.getInstance().getUser().isAdmin()){
+        			// TODO chamada para tela de secretarias
+        		} else {
+        			JOptionPane.showMessageDialog(contentPane, "Você não tem permissão para acessar essa funcionalidade");
+        		}
+        		
+        	}
+        });
+        btnSecretariat.setBounds(66, 214, 100, 100);
+        
+        ImageIcon sec = new ImageIcon(MenuFrame.class.getResource("/br/com/controle_de_micros/img/secretaria.png"));
+        Image secretariat = sec.getImage().getScaledInstance(btnSecretariat.getWidth(), btnSecretariat.getHeight(), Image.SCALE_SMOOTH);
+        btnSecretariat.setIcon(new ImageIcon(secretariat));
+        
+        contentPane.add(btnSecretariat);
         
 	}
 }

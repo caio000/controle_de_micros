@@ -3,4 +3,6 @@ encoding//src/br/com/controle_de_micros/control/UserControl.java=UTF-8
 encoding//src/br/com/controle_de_micros/dao/SecretariatDAO.java=UTF-8
 encoding//src/br/com/controle_de_micros/database/MariaDatabase.java=UTF-8
 encoding//src/br/com/controle_de_micros/model/Computer.java=UTF-8
+encoding//src/br/com/controle_de_micros/model/User.java=UTF-8
 encoding//src/br/com/controle_de_micros/view/LoginFrame.java=UTF-8
+encoding//src/br/com/controle_de_micros/view/RegisterFrame.java=UTF-8

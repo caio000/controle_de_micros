@@ -33,6 +33,10 @@ public class UserControl {
 		return dao.insert(user);
 	}
 	
+	public boolean updateUser(User user) {
+		return dao.update(user);
+	}
+	
 	/**
 	 * Essa função libera ou nao o acesso ao sistema para o usuario informado
 	 * 

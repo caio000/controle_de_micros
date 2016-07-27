@@ -80,7 +80,14 @@ public class UsersFrame extends JFrame {
 				if (e.getClickCount() == 2){
 					int line = table.getSelectedRow();
 					
-					System.out.println(table.getValueAt(line, 0));
+					String registation = table.getValueAt(line, 0).toString();
+					UserControl uc = new UserControl();
+					User user = uc.getUser(Long.parseLong(registation));
+					
+					JFrame userUp = new RegisterFrame(user);
+					userUp.setTitle("Alterar dados");
+					userUp.setVisible(true);
+					
 				}
 			}
 		});

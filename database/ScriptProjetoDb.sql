@@ -148,7 +148,7 @@ CREATE TABLE `user` (
 
 --
 -- Dumping data for table `user`
-INSERT INTO `user` (`registration`, `name`, `password`) VALUES (2020, 'admin', '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918');
+INSERT INTO `user` (`registration`, `name`, `password`, `isAdmin`) VALUES (2020, 'admin', '8C6976E5B5410415BDE908BD4DEE15DFB167A9C873FC4BB8A81F6F2AB448A918', TRUE);
 --
 
 LOCK TABLES `user` WRITE;

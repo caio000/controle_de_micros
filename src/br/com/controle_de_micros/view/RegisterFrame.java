@@ -1,5 +1,6 @@
 package br.com.controle_de_micros.view;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -29,18 +30,19 @@ public class RegisterFrame extends JFrame {
 		initComponent();
 	}
 	
+	public RegisterFrame (User user) {
+		initComponent(user);
+	}
+	
 	
 	public void initComponent() {
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 282, 391);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JLabel Matricula = new JLabel("Matricula");
-		Matricula.setBounds(34, 72, 66, 14);
-		contentPane.add(Matricula);
 		
 		final JFormattedTextField registrationField = new JFormattedTextField();
 		registrationField.setBounds(34, 85, 171, 27);
@@ -122,11 +124,115 @@ public class RegisterFrame extends JFrame {
 		
 		JLabel TituloCadastro = new JLabel("Cadastro");
 		TituloCadastro.setFont(new Font("Tahoma", Font.BOLD, 25));
-		TituloCadastro.setBounds(34, 22, 130, 27);
+		TituloCadastro.setBounds(34, 22, 222, 27);
 		contentPane.add(TituloCadastro);
 		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(34, 72, 46, 14);
-		contentPane.add(lblNewLabel);
+		JLabel registration = new JLabel("Matricula");
+		registration.setBounds(34, 72, 171, 14);
+		contentPane.add(registration);
+	}
+	
+	public void initComponent(final User user) {
+		
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 282, 391);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		final JFormattedTextField registrationField = new JFormattedTextField();
+		registrationField.setBounds(34, 85, 171, 27);
+		registrationField.setText(Long.toString(user.getRegistration()));
+		registrationField.setEditable(false);
+		contentPane.add(registrationField);
+		
+		JLabel Nome = new JLabel("Nome");
+		Nome.setBounds(34, 123, 66, 14);
+		contentPane.add(Nome);
+		
+		final JFormattedTextField nameField = new JFormattedTextField();
+		nameField.setBounds(34, 136, 171, 27);
+		nameField.setText(user.getName());
+		contentPane.add(nameField);
+		
+		JLabel Senha = new JLabel("Senha");
+		Senha.setBounds(34, 174, 46, 14);
+		contentPane.add(Senha);
+		
+		passwordField = new JPasswordField();
+		passwordField.setBounds(34, 188, 171, 27);
+		contentPane.add(passwordField);
+		
+		final JCheckBox isAdmin = new JCheckBox("Permiss\u00E3o de Administrador");
+		isAdmin.setBounds(31, 270, 198, 23);
+		contentPane.add(isAdmin);
+		
+		JButton atualizar = new JButton("Atualizar");
+		atualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				String name = nameField.getText();
+				@SuppressWarnings("deprecation")
+				String pass = passwordField.getText();
+				boolean asAdmin = isAdmin.isSelected();
+				
+				try {
+					
+					// algoritmo de criptografia
+					MessageDigest algorithm = MessageDigest.getInstance("SHA-256");
+    				byte messageDigest[] = algorithm.digest(pass.getBytes("UTF-8"));
+    			
+    				StringBuilder hexString = new StringBuilder();
+    				for (byte b : messageDigest)
+    					hexString.append(String.format("%02X", 0xFF & b));
+    			
+    				String cripPass = hexString.toString(); // hash da senha
+    				
+					// verifica todos os campos de dados
+					
+					if (name.isEmpty())
+						throw new Exception("O Campo nome é obrigatório");
+					else if (!pass.isEmpty())
+						user.setPassword(cripPass);
+    				
+					user.setName(name);
+					user.setAdmin(asAdmin);
+					
+					UserControl uc = new UserControl();
+					if (uc.updateUser(user))
+						JOptionPane.showMessageDialog(contentPane, "Dados atualizados");
+					else
+						throw new Exception("Não foi possivel alterar os dados.");
+					
+					dispose();
+					
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(null, e.getMessage());
+					e.printStackTrace();
+				}
+    			
+    			
+				
+			}
+		});
+		atualizar.setBounds(34, 300, 171, 23);
+		contentPane.add(atualizar);
+		
+		JLabel titulo = new JLabel("Atualizar dados");
+		titulo.setFont(new Font("Tahoma", Font.BOLD, 25));
+		titulo.setBounds(34, 22, 222, 27);
+		contentPane.add(titulo);
+		
+		JLabel registration = new JLabel("Matricula");
+		registration.setBounds(34, 72, 171, 14);
+		contentPane.add(registration);
+		
+		JLabel obs = new JLabel();
+		obs.setForeground(Color.RED);
+		obs.setText("<html>Caso não queira alterar sua senha deixe o campo em branco</html>");
+		obs.setBounds(34, 220, 200, 30);
+		
+		contentPane.add(obs);
 	}
 }

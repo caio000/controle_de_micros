@@ -105,19 +105,20 @@ public class LoginFrame extends JFrame {
         			User user = uc.getUser(Long.parseLong(reg));
         			user.setPassword(cripPass);
         			
+        			
         			if (uc.makeLogin(user)){
-        				JOptionPane.showMessageDialog(contentPane, "usuario valido");
         				SessionControl session = new SessionControl();
         				session.setUser(user); // Cria sessao do usuário.
         				
         				dispose();
         				JFrame menu = new MenuFrame();
         				menu.setVisible(true);
-        			} else
-        				JOptionPane.showMessageDialog(null, "Os dados informados não são validos.");
+        			} else {
+        				throw new Exception("Os dados informados não são validos.");
+        			}
 					
 				} catch (Exception e) {
-					
+					JOptionPane.showMessageDialog(contentPane, e.getMessage());
 				}
         	}
         });

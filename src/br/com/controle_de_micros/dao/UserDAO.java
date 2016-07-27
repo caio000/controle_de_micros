@@ -28,14 +28,24 @@ public class UserDAO extends DAO<User>{
 
 	@Override
 	public boolean update(User user) {
-		// TODO Atualizar os dados do usuario.
-		return false;
+		String sql = "UPDATE User SET name = \'?\', password = \'?\', isAdmin = ? WHERE registration = ?;";
+		
+		sql = sql.replaceFirst("\\?", user.getName().toUpperCase());
+		sql = sql.replaceFirst("\\?", user.getPassword());
+		sql = sql.replaceFirst("\\?", Boolean.toString(user.isAdmin()));
+		sql = sql.replaceFirst("\\?", Long.toString(user.getRegistration()));
+		
+		return database.update(sql);
 	}
 
 	@Override
 	public boolean delete(User user) {
 		// TODO Mudar o status do usuário.
-		return false;
+		String sql = "UPDATA User SET isActive = FALSE WHERE registration = ?";
+		
+		sql = sql.replaceFirst("\\?", Long.toString(user.getRegistration()));
+		
+		return database.delete(sql);
 	}
 
 	@Override
@@ -109,10 +119,13 @@ public class UserDAO extends DAO<User>{
 			
 			if (resultDb.next()) {
 				String name = resultDb.getString("name");
+				String password = resultDb.getString("password");
 				boolean isAdmin = resultDb.getBoolean("isAdmin");
 				boolean isActive = resultDb.getBoolean("isActive");
 				
-				user = new User(registration, name, null, isAdmin, isActive);
+				user = new User(registration, name, password, isAdmin, isActive);
+			} else {
+				user = new User(registration, null);
 			}
 			
 		} catch (Exception e) {
