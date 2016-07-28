@@ -40,8 +40,7 @@ public class UserDAO extends DAO<User>{
 
 	@Override
 	public boolean delete(User user) {
-		// TODO Mudar o status do usuário.
-		String sql = "UPDATA User SET isActive = FALSE WHERE registration = ?";
+		String sql = "UPDATE User SET isActive = FALSE WHERE registration = ?";
 		
 		sql = sql.replaceFirst("\\?", Long.toString(user.getRegistration()));
 		
@@ -52,7 +51,7 @@ public class UserDAO extends DAO<User>{
 	public List<User> listAll() {
 		List<User> list = new ArrayList<>();
 		
-		String query = "SELECT registration, name, isActive FROM user;";
+		String query = "SELECT registration, name, isActive FROM user WHERE isActive = TRUE;";
 		
 		ResultSet result = database.query(query);
 		

@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -56,7 +57,7 @@ public class UsersFrame extends JFrame {
 				insertUser.setVisible(true);
 			}
 		});
-		ButtonNovo.setBounds(299, 65, 133, 23);
+		ButtonNovo.setBounds(191, 65, 133, 23);
 		contentPane.add(ButtonNovo);
 		
 		JLabel TituloUsuarios = new JLabel("Usuarios");
@@ -65,7 +66,7 @@ public class UsersFrame extends JFrame {
 		contentPane.add(TituloUsuarios);
 		
 		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setBounds(32, 99, 400, 176);
+		scrollPane.setBounds(21, 99, 446, 176);
 		contentPane.add(scrollPane);
 		
 		table = new JTable() {
@@ -93,6 +94,41 @@ public class UsersFrame extends JFrame {
 		});
 		scrollPane.setViewportView(table);
 		table.setModel(model);
+		
+		// Botão Deletar
+		JButton btnDelete = new JButton("Deletar");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				
+				UserControl uc = new UserControl();
+				
+				try {
+					
+					int selectedRow = table.getSelectedRow(); // pega a linha que foi selecionada na tabela.
+					// caso a linha selecionada sejá igual a -1 (não selecionou nenhuma linha)
+					// Exibe uma mensagem de erro. 
+					if (selectedRow == -1)
+						throw new Exception("Selecione um usuário para remove-lo");
+					
+					// pega a matricula do usuário
+					String registration = table.getValueAt(selectedRow, 0).toString();
+					User user = uc.getUser(Long.parseLong(registration)); // objeto do tipo usuario com todos os seus dados.
+					// tenta deletar o usuário
+					if (uc.deleteUser(user))
+						JOptionPane.showMessageDialog(contentPane, "Usuário deletado com sucesso");
+					else
+						throw new Exception("Não foi possivel deletar o usuário, tente novamente mais tarde <br> ou entre em contado com o administrador");
+					
+					dispose();
+					
+				} catch (Exception e) {
+					JOptionPane.showMessageDialog(contentPane, e.getMessage());
+				}
+				
+			}
+		});
+		btnDelete.setBounds(334, 65, 133, 23);
+		contentPane.add(btnDelete);
 	}
 	
 	private void showUsers () {

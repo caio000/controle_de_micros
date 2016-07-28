@@ -32,9 +32,23 @@ public class UserControl {
 	public boolean insertUser(User user) {
 		return dao.insert(user);
 	}
-	
+	/**
+	 * Essa função atualiza os dados de um usuario informado
+	 * @author Caio de Freitas Adriano
+	 * @since 2016/07/28
+	 * @param user Objeto do tipo User que possui os dados do usuário
+	 * @return Retorna um Boolean TRUE caso a alteração ocorra corretamente.
+	 */
 	public boolean updateUser(User user) {
 		return dao.update(user);
+	}
+	/**
+	 * Essa função "deleta" um usuário do sistema, alterando o seu status isActive para FALSE.
+	 * @param user Objeto do tipo User que possui os dados o usuário.
+	 * @return Retorna um boolean TRUE caso o usuário sejá deletado com sucesso.
+	 */
+	public boolean deleteUser(User user) {
+		return dao.delete(user);
 	}
 	
 	/**
